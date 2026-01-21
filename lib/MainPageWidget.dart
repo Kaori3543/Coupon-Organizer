@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '/detail/CouponDetail.dart';
 import '/list/CouponListView.dart';
+import '/register/CouponRegisterPage.dart';
 
 class MainPageWidget extends StatefulWidget{
 
@@ -44,8 +45,10 @@ class _MainPageWidget extends State<MainPageWidget>{
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // TODO: 登録画面へ遷移(次のステップで実装)
-          print('登録ボタンがクリックされました');
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => CouponRegisterPage()),
+          );
         },
         backgroundColor: Colors.deepPurple,
         child: Icon(Icons.add, color: Colors.white),
