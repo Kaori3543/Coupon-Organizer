@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '/detail/CouponDetail.dart';
 import '/list/CouponListView.dart';
+import '/register/CouponRegisterPage.dart';
 
 class MainPageWidget extends StatefulWidget{
 
@@ -29,12 +30,29 @@ class _MainPageWidget extends State<MainPageWidget>{
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        CouponListView(openDetail),
-        if (_isSelectedItem)
-          CouponDetail(closeDetail)
-      ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('クーポン整理帳'),
+        backgroundColor: Colors.deepPurple,
+        foregroundColor: Colors.white,
+      ),
+      body: Stack(
+        children: [
+          CouponListView(openDetail),
+          if (_isSelectedItem)
+            CouponDetail(closeDetail)
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => CouponRegisterPage()),
+          );
+        },
+        backgroundColor: Colors.deepPurple,
+        child: Icon(Icons.add, color: Colors.white),
+      ),
     );
   }
 }

@@ -30,14 +30,16 @@ class CouponDetail extends StatelessWidget {
 
   // コンテンツの中身
   Widget mainContent(){
-    return Column(
-      //  表示するサイズを最小にする
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Image.asset('assets/images/c_img.jpg'),
-        mainCenterContent(),
-        mainBottomContent(),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        //  表示するサイズを最小にする
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image.asset('assets/images/c_img.jpg'),
+          mainCenterContent(),
+          mainBottomContent(),
+        ],
+      ),
     );
   }
 
@@ -53,41 +55,100 @@ class CouponDetail extends StatelessWidget {
   Widget mainBottomContent(){
     return Padding(
       padding: EdgeInsets.all(10),
-      child: Center(
-        child: Row(
-          children: [
-            Spacer(
-              flex: 1,
-            ),
-            Expanded(
-                flex: 2,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // 使用済みボタンと削除ボタン
+          Row(
+            children: [
+              Expanded(
                 child: ElevatedButton(
+                  onPressed: () {
+                    // TODO: 使用済みマーク機能(次のフェーズで実装)
+                    print('使用済みボタンをタップ');
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                        side: BorderSide(color: Colors.green)
+                      )
+                    )
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(8),
+                    child: FittedBox(
+                      fit: BoxFit.contain,
+                      child: Text("使用済み"),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(width: 10),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    // TODO: 削除機能(次のフェーズで実装)
+                    print('削除ボタンをタップ');
+                    closeAction();
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                        side: BorderSide(color: Colors.orange)
+                      )
+                    )
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(8),
+                    child: FittedBox(
+                      fit: BoxFit.contain,
+                      child: Text("削除"),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 10),
+          // 閉じるボタン
+          Center(
+            child: Row(
+              children: [
+                Spacer(flex: 1),
+                Expanded(
+                  flex: 2,
+                  child: ElevatedButton(
                     onPressed: () => {closeAction()},
                     child: Padding(
-                        child: FittedBox(
-                          fit: BoxFit.contain,
-                          child: Text("閉じる"),
-                        ),
-                        padding: EdgeInsets.all(2)),
+                      child: FittedBox(
+                        fit: BoxFit.contain,
+                        child: Text("閉じる"),
+                      ),
+                      padding: EdgeInsets.all(2)
+                    ),
                     style: ButtonStyle(
-                        backgroundColor:
-                        MaterialStateProperty.all<Color>(
-                            Colors.red),
-                        foregroundColor:
-                        MaterialStateProperty.all<Color>(
-                            Colors.white),
-                        shape: MaterialStateProperty.all<
-                            RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                                borderRadius:
-                                BorderRadius.circular(5.0),
-                                side: BorderSide(
-                                    color: Colors.red)))))),
-            Spacer(
-              flex: 1,
-            )
-          ],
-        ),
+                      backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                      foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                          side: BorderSide(color: Colors.red)
+                        )
+                      )
+                    )
+                  )
+                ),
+                Spacer(flex: 1)
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
